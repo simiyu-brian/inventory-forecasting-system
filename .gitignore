@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+*.csv
+*.log
+pipeline_log.txt
+*.xlsx
