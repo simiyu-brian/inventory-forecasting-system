@@ -1,6 +1,6 @@
 """
 core/security.py — JWT auth + role guards
-Roles: admin | analyst (analyst = read-only)
+Roles: admin | manager | analyst (analyst = read-only)
 """
 import os
 from datetime import datetime, timedelta
@@ -51,6 +51,12 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
 def require_admin(current_user: dict = Depends(get_current_user)) -> dict:
     if current_user["role"] != "admin":
         raise HTTPException(status_code=403, detail="Admin access required")
+    return current_user
+
+def require_manager_or_above(current_user: dict = Depends(get_current_user)) -> dict:
+    """Allow admin and manager roles. Analysts are read-only."""
+    if current_user["role"] not in ("admin", "manager"):
+        raise HTTPException(status_code=403, detail="Manager or admin access required")
     return current_user
 
 def require_any_role(current_user: dict = Depends(get_current_user)) -> dict:
