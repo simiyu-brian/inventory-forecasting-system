@@ -1,103 +1,138 @@
-# AdWatch Rewards Platform (PHP + MySQL) — Starter Kit
+# Inventory Forecasting System
 
-A learning-ready starter kit for a **Paid Registration + Tasks to Earn** platform.
-Users must **pay to join** (payment simulated here), then access a **dashboard** with
-their **investment overview** and a **Task Center**: Referrals, Watching YouTube Ads,
-and Downloading Files — each can award points/earnings.
-
-> ⚠️ For education/demo only. Not production-ready. Add real security, validation, and
-> replace the **payment simulation** with a real gateway (M‑Pesa/Stripe/PayPal/Flutterwave).
+An intelligent inventory forecasting and sales analytics system built with PostgreSQL, featuring a star schema data warehouse, automated ETL pipeline, and nightly data quality checks.
 
 ---
 
 ## Features
-- Paid registration (simulated) + login/logout
-- Dashboard showing Joined Amount, Expected Profit, Balance, and task earnings
-- Task Center: Referrals (unique link), Watch Ads (YouTube timer), Downloads (award on click)
-- Simple Admin pages to manage ads and downloadable files
-- MySQL schema included (`db.sql`)
+
+- **PostgreSQL Database** — Robust relational database for transactional and analytical data
+- **Star Schema Data Warehouse** — Optimized dimensional model for fast analytical queries
+- **ETL Pipeline** — Automated Extract, Transform, Load process for data ingestion
+- **Sales Analytics** — Insights into sales trends, product performance, and demand patterns
+- **Automated Nightly Data Quality Checks** — Ensures data integrity and consistency
+- **Forecasting Engine** — Predicts future inventory needs based on historical sales data
 
 ---
 
-## Quick Start
+## Project Structure
 
-1) Create a MySQL database and import `db.sql`:
+```
+inventory-forecasting-system/
+├── scripts/                  # SQL and Python scripts
+├── run_pipeline.bat          # Script to run the full ETL pipeline
+├── requirements.txt          # Python dependencies
+├── .gitignore
+└── README.md
+```
+
+---
+
+## Tech Stack
+
+| Component        | Technology          |
+|-----------------|---------------------|
+| Database         | PostgreSQL          |
+| Data Warehouse   | Star Schema (PostgreSQL) |
+| ETL Pipeline     | Python              |
+| Automation       | Batch scripting (.bat) |
+| Data Quality     | Automated SQL checks |
+
+---
+
+## Setup & Installation
+
+### Prerequisites
+
+- Python 3.8+
+- PostgreSQL 13+
+- pip
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/simiyu-brian/inventory-forecasting-system.git
+cd inventory-forecasting-system
+```
+
+### 2. Install Python Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configure the Database
+
+- Create a PostgreSQL database
+- Update the database connection settings in the configuration file
+
 ```sql
-CREATE DATABASE adwatch CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
--- then import db.sql into this database
+CREATE DATABASE inventory_forecasting;
 ```
 
-2) Configure DB in `config.php`:
-```php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'adwatch');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('APP_URL', 'http://localhost/adwatch'); // adjust to your local path/base URL
-```
+### 4. Run the ETL Pipeline
 
-3) Place the project in your web server root, e.g.:
-- XAMPP on Windows: `C:\xampp\htdocs\adwatch`
-- Linux Apache: `/var/www/html/adwatch`
+```bash
+# On Windows
+run_pipeline.bat
 
-4) Visit the app in your browser at `APP_URL` (e.g. `http://localhost/adwatch/public/`).
-
-5) Admin default login:
-```
-email: admin@example.com
-password: admin123
-```
-> Change this after first login.
-
----
-
-## Payment Simulation
-- Registration takes an entered **Joined Amount**.
-- Clicking **"Simulate Payment Success"** completes registration.
-- Replace with real payment integration:
-  - M‑Pesa: Safaricom Daraja API
-  - Stripe/PayPal/Flutterwave: Server-side SDKs and webhooks
-
----
-
-## Notes
-- This is **minimal** to stay readable. Add CSRF tokens, stronger validation,
-  server-side verification of watch-time, and real anti-cheat for tasks.
-- Ad rewards are limited to **once per ad per day**.
-- Download rewards are limited to **once per file per day**.
-- Referral reward is granted **once** when the referred user completes payment.
-
----
-
-## Folder Structure
-```
-adwatch_rewards_php/
-├─ public/
-│  ├─ index.php            # Landing page
-│  ├─ register.php         # Registration + payment simulation
-│  ├─ pay.php              # Simulate payment success
-│  ├─ login.php            # Login
-│  ├─ logout.php           # Logout
-│  ├─ dashboard.php        # User dashboard
-│  ├─ tasks.php            # Task center (tabs/cards)
-│  ├─ watch.php            # Watch an ad
-│  ├─ award_ad.php         # POST endpoint to award ad
-│  ├─ download.php         # Download + award
-│  ├─ referrals.php        # Referral details
-│  ├─ profile.php          # Edit profile (basic)
-│  ├─ admin/
-│  │  ├─ index.php         # Admin home
-│  │  ├─ manage_ads.php    # CRUD for ads
-│  │  ├─ manage_dl.php     # CRUD for downloads
-│  ├─ css/styles.css
-│  ├─ js/app.js
-├─ config.php              # DB + helpers
-├─ db.sql                  # MySQL schema + seed
-└─ README.md
+# Or run the Python scripts directly
+python scripts/etl_pipeline.py
 ```
 
 ---
 
-## Legal
-- If you show YouTube videos, respect **YouTube Terms of Service** and your local laws.
-- For music downloads, use **properly licensed** files only.
+## Data Warehouse Schema
+
+The system uses a **star schema** with the following structure:
+
+- **Fact Table:** `fact_sales` — stores transactional sales data
+- **Dimension Tables:**
+  - `dim_product` — product details
+  - `dim_date` — date/time hierarchy
+  - `dim_location` — warehouse/store locations
+  - `dim_supplier` — supplier information
+
+---
+
+## ETL Pipeline
+
+The pipeline runs nightly and performs the following steps:
+
+1. **Extract** — Pull raw data from source systems
+2. **Transform** — Clean, validate, and reshape data
+3. **Load** — Insert transformed data into the data warehouse
+4. **Quality Checks** — Validate row counts, null checks, and referential integrity
+
+---
+
+## Forecasting
+
+The forecasting module uses historical sales data to:
+
+- Predict future demand per product
+- Flag low-stock items before they run out
+- Recommend reorder quantities and timing
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add your feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+## Author
+
+**Brian Simiyu**  
+[GitHub](https://github.com/simiyu-brian)
