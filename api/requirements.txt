@@ -1,0 +1,28 @@
+# ================================
+# Inventory Forecasting System API
+# ================================
+
+# Web framework
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# Database (matches your existing setup)
+psycopg2-binary==2.9.9
+SQLAlchemy==2.0.23
+
+# Data processing
+pandas==2.1.4
+numpy==1.26.2
+
+# Auth
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Settings
+python-dotenv==1.0.0
+pydantic-settings==2.2.1
+
+# Scraper dependencies (already in your scripts)
+requests==2.31.0
+beautifulsoup4==4.12.3
+lxml==5.1.0
