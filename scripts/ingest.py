@@ -5,7 +5,7 @@ from sqlalchemy import create_engine, text
 engine = create_engine('postgresql+psycopg2://postgres:simiyu@localhost:5432/inventory_db')
 
 # Read CSV
-df = pd.read_csv(r'C:\Users\admin\Downloads\sales_analysis.csv')
+df = pd.read_csv(r'C:\Users\HomePC\Data-VisualizationR3\Data set\supermarket_sales.csv')
 df['Date'] = pd.to_datetime(df['Date']).dt.strftime('%Y-%m-%d')
 df['Time'] = pd.to_datetime(df['Time'], format='%I:%M:%S %p').dt.strftime('%H:%M:%S')
 

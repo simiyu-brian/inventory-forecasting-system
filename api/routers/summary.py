@@ -102,24 +102,26 @@ def get_summary(
               AND st.sale_date <  CURRENT_DATE - :days  * INTERVAL '1 day'
             GROUP BY st.product_id
         )
-        SELECT
-            p.product_id,
-            p.product_line,
-            COALESCE(c.revenue_curr, 0) AS revenue_curr,
-            COALESCE(pr.revenue_prev, 0) AS revenue_prev,
-            CASE
-                WHEN COALESCE(pr.revenue_prev, 0) = 0 THEN NULL
-                ELSE ROUND(
-                    ((COALESCE(c.revenue_curr,0) - COALESCE(pr.revenue_prev,0))
-                     / COALESCE(pr.revenue_prev,0) * 100)::numeric,
-                    1
-                )
-            END AS change_pct
-        FROM products p
-        LEFT JOIN current_period  c  ON c.product_id  = p.product_id
-        LEFT JOIN prev_period     pr ON pr.product_id = p.product_id
-        WHERE COALESCE(c.revenue_curr, 0) > 0
-           OR COALESCE(pr.revenue_prev, 0) > 0
+        SELECT * FROM (
+            SELECT
+                p.product_id,
+                p.product_line,
+                COALESCE(c.revenue_curr, 0) AS revenue_curr,
+                COALESCE(pr.revenue_prev, 0) AS revenue_prev,
+                CASE
+                    WHEN COALESCE(pr.revenue_prev, 0) = 0 THEN NULL
+                    ELSE ROUND(
+                        ((COALESCE(c.revenue_curr,0) - COALESCE(pr.revenue_prev,0))
+                         / COALESCE(pr.revenue_prev,0) * 100)::numeric,
+                        1
+                    )
+                END AS change_pct
+            FROM products p
+            LEFT JOIN current_period  c  ON c.product_id  = p.product_id
+            LEFT JOIN prev_period     pr ON pr.product_id = p.product_id
+            WHERE COALESCE(c.revenue_curr, 0) > 0
+               OR COALESCE(pr.revenue_prev, 0) > 0
+        ) sub
         ORDER BY ABS(COALESCE(change_pct, 0)) DESC
         LIMIT 5
     """), {"days": days, "days2": days * 2}).fetchall()
