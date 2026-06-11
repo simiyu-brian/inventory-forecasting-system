@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forecast Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .big {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        canvas {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>📊 Forecasting Dashboard</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <div class="big">Best Model</div>
+        <div id="bestModel">Loading...</div>
+    </div>
+
+    <div class="card">
+        <div class="big">Score</div>
+        <div id="score">0</div>
+    </div>
+
+</div>
+
+<div class="card" style="margin-top:20px;">
+    <canvas id="forecastChart"></canvas>
+</div>
+
+<script>
+
+    // SAFE JSON injection from Django
+    const data = JSON.parse('{{ data|escapejs }}');
+
+    document.getElementById("bestModel").innerText = data.best_model;
+    document.getElementById("score").innerText = data.score.toFixed(2);
+
+    const ctx = document.getElementById('forecastChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: data.predictions.map((_, i) => `t+${i+1}`),
+            datasets: [{
+                label: 'Forecast',
+                data: data.predictions,
+                borderColor: 'blue',
+                fill: false
+            }]
+        }
+    });
+
+</script>
+
+</body>
+</html>
