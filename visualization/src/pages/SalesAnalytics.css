@@ -1,0 +1,39 @@
+.sa-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.gran-tabs { display: flex; gap: .25rem; }
+
+.gran-tab {
+  padding: .3rem .7rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: .775rem;
+  color: var(--color-text-muted);
+  transition: background .15s, color .15s;
+}
+
+.gran-tab:hover  { background: var(--color-bg); color: var(--color-text); }
+.gran-tab.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+
+.sa-table-wrap { padding: 0; overflow-x: auto; }
+
+.sa-table {
+  width: 100%; border-collapse: collapse; font-size: .8rem;
+}
+
+.sa-table th {
+  text-align: left; padding: .65rem 1rem; font-weight: 600;
+  color: var(--color-text-muted); border-bottom: 1px solid var(--color-border);
+}
+
+.sa-table td {
+  padding: .6rem 1rem; border-bottom: 1px solid var(--color-border);
+}
+
+.sa-table tr:last-child td { border-bottom: none; }
+.sa-table tr:hover td { background: var(--color-bg); }
+
+.delta-up   { color: var(--color-ok); font-weight: 600; }
+.delta-down { color: var(--color-critical); font-weight: 600; }

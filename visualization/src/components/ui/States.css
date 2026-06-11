@@ -1,0 +1,68 @@
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-text  { height: .875rem; margin-bottom: .5rem; }
+.skeleton-title { height: 1.25rem; margin-bottom: .75rem; width: 60%; }
+.skeleton-box   { height: 120px; }
+.skeleton-row   { height: 2.5rem; margin-bottom: .5rem; }
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  gap: .5rem;
+}
+
+.empty-state-icon {
+  font-size: 2.5rem;
+  color: var(--color-border);
+  margin-bottom: .25rem;
+}
+
+.empty-state-title { font-size: .925rem; font-weight: 600; color: var(--color-text); }
+.empty-state-desc  { font-size: .8rem; max-width: 280px; }
+
+/* Error state */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  gap: .5rem;
+}
+
+.error-state-icon  { font-size: 2rem; color: var(--color-critical); }
+.error-state-title { font-size: .925rem; font-weight: 600; color: var(--color-critical); }
+.error-state-msg   { font-size: .8rem; color: var(--color-text-muted); max-width: 280px; }
+
+.btn-retry {
+  margin-top: .5rem;
+  padding: .4rem 1rem;
+  border: 1px solid var(--color-critical);
+  border-radius: var(--radius-sm);
+  color: var(--color-critical);
+  font-size: .8rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  transition: background .15s;
+}
+
+.btn-retry:hover { background: var(--color-crit-bg); }

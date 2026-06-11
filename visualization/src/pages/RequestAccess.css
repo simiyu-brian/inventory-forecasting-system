@@ -1,0 +1,60 @@
+.ra-back {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .775rem;
+  color: var(--color-text-muted);
+  margin-bottom: .5rem;
+  transition: color .15s;
+}
+.ra-back:hover { color: var(--color-text); }
+
+.ra-req { color: var(--color-critical); margin-left: 1px; }
+
+.ra-row {
+  display: flex;
+  gap: .75rem;
+}
+.ra-row .auth-field { flex: 1; }
+
+.auth-form textarea {
+  width: 100%;
+  padding: .55rem .75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: .825rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+  box-sizing: border-box;
+  transition: border-color .15s, box-shadow .15s;
+}
+.auth-form textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+}
+
+.ra-success {
+  text-align: center;
+  padding: 1rem 0;
+}
+.ra-success-icon {
+  font-size: 3rem;
+  color: var(--color-ok);
+  display: block;
+  margin: 0 auto .875rem;
+}
+.ra-success h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 .625rem;
+}
+.ra-success p {
+  font-size: .825rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin: 0;
+}

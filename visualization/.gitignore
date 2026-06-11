@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Vite build output & cache
+dist/
+dist-ssr/
+.vite/
+
+# CRA build output
+build/
+
+# Testing
+coverage/
+
+# Environment - never commit real .env files; use .env.example for documentation
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

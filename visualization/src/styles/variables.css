@@ -1,0 +1,45 @@
+:root {
+  /* Brand */
+  --color-primary:       #2563eb;
+  --color-primary-dark:  #1d4ed8;
+  --color-primary-light: #eff6ff;
+
+  /* Status */
+  --color-ok:       #16a34a;
+  --color-ok-bg:    #f0fdf4;
+  --color-warning:  #d97706;
+  --color-warn-bg:  #fffbeb;
+  --color-critical: #dc2626;
+  --color-crit-bg:  #fef2f2;
+
+  /* Neutrals */
+  --color-bg:         #f8fafc;
+  --color-surface:    #ffffff;
+  --color-border:     #e2e8f0;
+  --color-text:       #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-light: #94a3b8;
+
+  /* Sidebar */
+  --sidebar-width:          220px;
+  --sidebar-collapsed-width: 56px;
+  --sidebar-bg:             #1e293b;
+  --sidebar-text:           #cbd5e1;
+  --sidebar-text-active:    #ffffff;
+  --sidebar-active-bg:      #2563eb;
+  --sidebar-hover-bg:       #334155;
+
+  /* Top bar */
+  --topbar-height: 56px;
+
+  /* Typography */
+  --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Radii / shadows */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.10);
+}
